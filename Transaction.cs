@@ -64,3 +64,31 @@ public class SuspiciousActivityLog
     public DateTime DetectedAt { get; set; }
     public Transaction Transaction { get; set; }
 }
+public class TransactionProcessor
+{
+    private readonly BankDbContext _context;
+
+    public TransactionProcessor(BankDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task ProcessTransactionAsync(Transaction transaction)
+    {
+        // Detect fraudulent activity (example logic)
+        if (transaction.Amount > 10000)
+        {
+            transaction.FraudFlag = true;
+            _context.SuspiciousActivityLogs.Add(new SuspiciousActivityLog
+            {
+                TransactionId = transaction.TransactionId,
+                SuspiciousReason = "High Amount Transaction",
+                DetectedAt = DateTime.Now
+            });
+        }
+
+        // Update transaction status
+        transaction.Status = transaction.FraudFlag ? "Pending Approval" : "Approved";
+        await _context.SaveChangesAsync();
+    }
+}
