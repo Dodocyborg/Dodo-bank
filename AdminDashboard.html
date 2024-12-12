@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Approvals</title>
+</head>
+<body>
+    <h1>Admin Transaction Approvals</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var approval in Model)
+            {
+                <tr>
+                    <td>@approval.TransactionId</td>
+                    <td>@approval.Transaction.Amount</td>
+                    <td>@approval.Status</td>
+                    <td>
+                        <form method="post" action="/Admin/ApproveTransaction">
+                            <input type="hidden" name="transactionId" value="@approval.TransactionId" />
+                            <button type="submit" name="isApproved" value="true">Approve</button>
+                            <button type="submit" name="isApproved" value="false">Decline</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
