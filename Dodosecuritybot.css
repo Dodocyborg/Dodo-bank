@@ -1,0 +1,123 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using BCrypt.Net;
+using System.Collections.Generic;
+
+public class DodoSecurityBot
+{
+    // Bot Authentication (Secure Login)
+    private static string botUsername = "dodoBot";
+    private static string botPasswordHash = "$2a$12$98hUbzzXYrtFs9kI3fICM7YyCml2uHDw3WquK6bU1vR9vZT0i.BCi"; // Example hash
+
+    // Monitor System
+    private static bool isSQLInjectionDetected = false;
+    private static bool systemFailureDetected = false;
+
+    // Emergency Action
+    public static async Task MonitorSystemAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            // Simulate system checks
+            CheckForSQLInjection();
+            CheckForSystemFailures();
+
+            if (isSQLInjectionDetected || systemFailureDetected)
+            {
+                await HandleEmergency();
+            }
+
+            // Monitor every 10 seconds
+            await Task.Delay(10000, stoppingToken);
+        }
+    }
+
+    // Bot Authentication Method
+    public static bool AuthenticateBot(string inputPassword)
+    {
+        return VerifyPassword(inputPassword, botPasswordHash);
+    }
+
+    // Verify Bot Password using bcrypt
+    private static bool VerifyPassword(string inputPassword, string storedHash)
+    {
+        return BCrypt.Net.BCrypt.Verify(inputPassword, storedHash);
+    }
+
+    // Simulate Checking for SQL Injection
+    private static void CheckForSQLInjection()
+    {
+        // Mock detection logic - replace with actual SQL injection detection
+        if (/* SQL Injection Detection Condition */)
+        {
+            isSQLInjectionDetected = true;
+            Console.WriteLine("SQL Injection detected!");
+        }
+    }
+
+    // Simulate Checking for System Failures
+    private static void CheckForSystemFailures()
+    {
+        // Example: If login attempts exceed a threshold, mark as failure
+        if (/* System failure detection logic */)
+        {
+            systemFailureDetected = true;
+            Console.WriteLine("System failure detected!");
+        }
+    }
+
+    // Handle Emergencies (SQL Injection, System Failures)
+    private static async Task HandleEmergency()
+    {
+        if (isSQLInjectionDetected)
+        {
+            Console.WriteLine("Handling SQL Injection Emergency...");
+            await RebootSystem();
+            isSQLInjectionDetected = false; // Reset after action
+        }
+
+        if (systemFailureDetected)
+        {
+            Console.WriteLine("Handling System Failure Emergency...");
+            await RebootSystem();
+            systemFailureDetected = false; // Reset after action
+        }
+    }
+
+    // Simulate Rebooting System
+    private static async Task RebootSystem()
+    {
+        Console.WriteLine("Rebooting the system...");
+        await Task.Delay(5000);  // Simulate time taken for reboot
+        Console.WriteLine("System rebooted successfully.");
+    }
+
+    // Main Program to run the Bot
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Starting Dodo Security Bot...");
+
+        // Ask for the bot's password to authenticate
+        Console.Write("Enter bot password: ");
+        string inputPassword = Console.ReadLine();
+
+        if (!AuthenticateBot(inputPassword))
+        {
+            Console.WriteLine("Invalid password! Access denied.");
+            return;
+        }
+
+        // Create a CancellationTokenSource for monitoring
+        var cts = new CancellationTokenSource();
+
+        // Start monitoring the system
+        Task.Run(async () => await MonitorSystemAsync(cts.Token));
+
+        // Simulate system running
+        Console.WriteLine("Bot is now monitoring the system...");
+        Console.WriteLine("Press any key to stop the bot...");
+        Console.ReadKey();
+        cts.Cancel(); // Stop monitoring when the key is pressed
+    }
+}
