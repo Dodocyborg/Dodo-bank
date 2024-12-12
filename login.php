@@ -2,7 +2,7 @@
 session_start();
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = Lambo2023@
 $dbname = "bank_system"; // Change to your DB name
 
 $conn = new mysqli($servername, $username, $password, $dbname);
