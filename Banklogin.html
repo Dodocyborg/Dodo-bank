@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodo Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Dodo Bank API Integration</h1>
+
+    <!-- Input Form to get Access Token -->
+    <div class="form-group">
+        <label for="access_token">Access Token</label>
+        <input type="text" id="access_token" placeholder="Enter Access Token">
+    </div>
+
+    <!-- Button to trigger bank info fetch -->
+    <button id="getBankInfoBtn">Get Bank Info</button>
+
+    <!-- Results display section -->
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    // JavaScript for interacting with the Flask backend API
+    document.getElementById('getBankInfoBtn').addEventListener('click', function() {
+        // Get the access token entered by the user
+        const accessToken = document.getElementById('access_token').value;
+
+        // Validate if the access token is provided
+        if (!accessToken) {
+            document.getElementById('result').innerHTML = '<p class="error">Please provide a valid access token.</p>';
+            return;
+        }
+
+        // Prepare request data
+        const requestData = {
+            access_token: accessToken
+        };
+
+        // Send an AJAX request to the Flask backend to get bank info
+        fetch('/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json()) // Convert the response to JSON
+        .then(data => {
+            // Check if data contains accounts and display them
+            if (data && data.accounts) {
+                let output = '<h2>Bank Accounts Information</h2>';
+                data.accounts.forEach(account => {
+                    output += `
+                        <p><strong>Account Name:</strong> ${account.name}</p>
+                        <p><strong>Account ID:</strong> ${account.account_id}</p>
+                        <p><strong>Available Balance:</strong> ${account.balances.available} ${account.balances.iso_currency_code}</p>
+                        <p><strong>Account Type:</strong> ${account.type}</p>
+                        <hr>
+                    `;
+                });
+                document.getElementById('result').innerHTML = output;
+            } else {
+                // If no accounts found, show an error message
+                document.getElementById('result').innerHTML = '<p class="error">No bank accounts found.</p>';
+            }
+        })
+        .catch(error => {
+            // If there's an error with the request, display it
+            document.getElementById('result').innerHTML = `<p class="error">Error: ${error.message}</p>`;
+        });
+    });
+</script>
+
+</body>
+</html>
