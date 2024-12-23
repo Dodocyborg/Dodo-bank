@@ -2,7 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank API Integration</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Dodo Bank API Integration</h1>
+
+    <!-- Input Access Token -->
+    <div>
+        <h2>Authenticate</h2>
+        <input type="text" id="access_token" placeholder="Enter Access Token">
+        <button onclick="getAuth()">Get Account Details</button>
+    </div>
+
+    <div id="auth_result"></div>
+
+    <!-- Fetch Bank Transfer Events -->
+    <div>
+        <h2>Bank Transfer Events</h2>
+        <input type="date" id="start_date" placeholder="Start Date">
+        <input type="date" id="end_date" placeholder="End Date">
+        <button onclick="getBankTransferEvents()">Get Events</button>
+    </div>
+
+    <div id="events_result"></div>
+
+    <script>
+        async function getAuth() {
+            const accessToken = document.getElementById('access_token').value;
+            if (!accessToken) {
+                alert('Access Token is required');
+                return;
+            }
+
+            try {
+                const response = await axios.post('/auth', { access_token: accessToken });
+                document.getElementById('auth_result').innerText = JSON.stringify(response.data, null, 2);
+            } catch (error) {
+                console.error(error);
+                alert('Failed to fetch account details.');
+            }
+        }
+
+        async function getBankTransferEvents() {
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+
+            if (!startDate || !endDate) {
+                alert('Start Date and End Date are required');
+                return;
+            }
+
+            try {
+                const response = await axios.post('/bank_transfer_events', { start_date: startDate, end_date: endDate });
+                document.getElementById('events_result').innerText = JSON.stringify(response.data, null, 2);
+            } catch (error) {
+                console.error(error);
+                alert('Failed to fetch bank transfer events.');
+            }
+        }
+    </script>
+</body>
+</html>
+
     <title>Dodo Bank</title>
     <link rel="stylesheet" href="styles.css">
 </head>
