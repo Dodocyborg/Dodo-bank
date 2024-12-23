@@ -1,55 +1,22 @@
+<!-- Loginwebsite.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><?php
-// Ensure the user is logged in before accessing the dashboard
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: Loginwebsite.html);
-    exit();
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en"><nav>
-    <ul>
-        <li><a href="Index.html">Home</a></li>
-        <li><a href="Login.html">Login</a></li>
-        <li><a href="AdminDashboard.html">Admin Dashboard</a></li>
-        <li><a href="account-opening.html">Open Account</a></li>
-        <li><a href="loan-services.html">Loan Services</a></li>
-        <li><a href="dashboard.php">User Dashboard</a></li>
-    </ul>
-</nav>
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-</head>
-<body>
-    <h1>Welcome to the Bank Admin Dashboard</h1>
-    <p>Here you can manage transactions, users, and more.</p>
-    <a href="logout.php">Logout</a>
-</body>
-</html>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Login</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Welcome to the Central Bank</h2>
-        <form action="login.php" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    <h2>Bank Login</h2>
+    <!-- Form to enter username and password -->
+    <form action="login.php" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
 
-            <button type="submit">Login</button>
-        </form>
-    </div>
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
