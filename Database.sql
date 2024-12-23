@@ -1,7 +1,17 @@
 CREATE TABLE Admins (
     AdminId INT PRIMARY KEY IDENTITY(1,1),
     Username VARCHAR(50),
-    PasswordHash VARCHAR(255),
+    PasswordHash VARCHAR(255),<nav>
+    <ul>
+        <li><a href="Index.html">Home</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="AdminDashboard.html">Admin Dashboard</a></li>
+        <li><a href="account-opening.html">Open Account</a></li>
+        <li><a href="loan-services.html">Loan Services</a></li>
+        <li><a href="dashboard.php">User Dashboard</a></li>
+    </ul>
+</nav>
+
     FullName VARCHAR(100),
     CreatedAt DATETIME DEFAULT GETDATE()
 );
