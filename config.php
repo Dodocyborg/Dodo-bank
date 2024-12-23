@@ -1,4 +1,18 @@
-<?php
+<?php<?php
+$host = 'localhost'; // Change this if you're using a remote database
+$dbname = 'DodoBank';
+$username = 'admin';
+$password = 'Lambo2023@'; // Use a strong password
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected to the database successfully!";
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+?>
+
 $host = 'localhost';
 $dbname = 'DodoBank';
 $username = 'admin';
