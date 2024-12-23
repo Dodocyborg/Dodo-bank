@@ -3,7 +3,20 @@ session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
+}<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
+    // If not logged in, redirect to login page
+    header("Location: Loginwebsite.html");
+    exit();
 }
+
+// Display dashboard
+echo "Welcome, " . $_SESSION['admin_username'] . "!";
+?>
+
 
 $servername = "localhost";
 $username = "root";
