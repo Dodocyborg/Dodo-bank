@@ -10,4 +10,27 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-?>
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodo Bank</title>
+</head>
+<body>
+    <h1>Welcome to Dodo Bank</h1>
+    <div id="env-details"></div>
+
+    <script>
+        // Fetch environment variables from backend
+        fetch('api/config.php')
+            .then(response => response.json())
+            .then(data => {
+                // Display the Plaid environment (non-sensitive)
+                document.getElementById('env-details').innerText = `Plaid Environment: ${data.PLAID_ENV}`;
+            })
+            .catch(error => console.error('Error loading environment variables:', error));
+    </script>
+</body>
+</html>
+
