@@ -1,187 +1,59 @@
-/* styles.css */
+/* Ensure the page background is dark blue */
 body {
-    font-family: Serif
+    background-color: #00008B; /* Dark blue background */
+    color: white; /* White text for contrast */
+    font-family: Arial, sans-serif; /* Optional: Set a font family */
     margin: 0;
-    padding: 0;body {
-    font-family: Arial, sans-serif;/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;/* Style for the logo container */
-.logo {
-    position: absolute;   /* Position it relative to the page */
-    top: 0;               /* Align it to the top */
-    left: 0;              /* Align it to the left */
-    z-index: 10;          /* Ensure it stays on top of other content */
-}
-
-.logo img {
-    width: 100px;         /* Set the width of the logo */
-    height: auto;         /* Keep aspect ratio */
-}
-
-}
-
-/* Body styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #00008B
-    text-align: center;
-}
-
-/* Header with Logo */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #00008B
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 10px 0;
-}
-
-.logo-container {
-    display: flex;
-    justify-content: center;
-}
-
-.logo {
-    max-width: 200px;
-    max-height: 50px;
-}
-
-/* Main Content Styling */
-main {
-    margin-top: 80px; /* Ensure content is not hidden under the fixed header */
     padding: 20px;
 }
 
-h1 {
-    color: #00008B
-}
-
-form {
-    margin-top: 20px;
-}
-
-input {
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #00008B
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #00008B
-}
-
-/* Account Info and Transfer Section */
-#account-info {
-    margin-top: 20px;
-}
-
-#account-details {
-    text-align: left;
-    background-color #00008B
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Footer (Optional) */
-footer {
-    margin-top: 30px;
-    background-color:#00008B
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-.logo-container {
-    margin-top: 20px;
-}
-
+/* Logo Styling */
 .logo {
-    max-width: 200px;
+    width: 150px; /* Set width of logo */
+    height: auto; /* Keep the aspect ratio of the logo */
+    display: block;
+    margin: 0 auto 20px auto; /* Center the logo and give bottom margin */
 }
 
-h1 {
-    color: #333;
+/* Dark Blue Text */
+.dark-blue-text {
+    color: darkblue; /* Dark blue color for text */
+    font-size: 20px;
+    font-weight: bold;
 }
 
-form {
-    margin-top: 20px;
+/* Dark Blue Background (on a specific div) */
+.dark-blue-background {
+    background-color: darkblue; /* Dark blue background for div */
+    color: white; /* White text for contrast */
+    padding: 20px;
+    border-radius: 8px; /* Optional: Rounded corners */
+    text-align: center; /* Center align text */
 }
 
-input {
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
+/* Dark Blue Border */
+.dark-blue-border {
+    border: 3px solid darkblue;
+    padding: 20px;
+    width: 80%;
+    margin: 10px auto;
+    text-align: center; /* Center align text */
 }
 
-button {
-    padding: 10px 20px;
-    background-color:#00008b
+/* Dark Blue Link */
+.dark-blue-link {
+    color: darkblue;
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+}
+
+.dark-blue-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Dark Blue Inline Styling */
+div[style*="background-color: #00008B;"] {
     color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color:#00008b
-}
-
-    background-color: #003366;
-    color: blue;
-}
-
-header {
-    background-color: #00008b
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
-main {
-    padding: 20px;
-}
-
-a {
-    color: #00008b
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: #00008b
-    text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    text-align: center;
 }
