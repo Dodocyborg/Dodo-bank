@@ -12,6 +12,16 @@ VALUES ('Logankeener', 'Lambo2023@', 'admin'),
        ('Kenzo', 'Lambo2023@', 'admin');CREATE DATABASE DodoBank;
 
 USE DodoBank;
+<nav>
+    <ul>
+        <li><a href="Index.html">Home</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="AdminDashboard.html">Admin Dashboard</a></li>
+        <li><a href="account-opening.html">Open Account</a></li>
+        <li><a href="loan-services.html">Loan Services</a></li>
+        <li><a href="dashboard.php">User Dashboard</a></li>
+    </ul>
+</nav>
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
