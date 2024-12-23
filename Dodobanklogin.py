@@ -12,8 +12,8 @@ numbers = response['numbers']{
         "unofficial_currency_code": null
       },
       "mask": "9606",
-      "name": "Plaid Checking",
-      "official_name": "Plaid Gold Checking",
+      "name": "dodo bank checking",
+      "official_name": dodo bank checking",
       "subtype": "checking",
       "type": "depository"
     }
@@ -64,7 +64,7 @@ numbers = response['numbers']{
     "consent_expiration_time": null,
     "error": null,
     "institution_id": "ins_117650",
-    "institution_name": "Royal Bank of Plaid",
+    "institution_name": "Dodo Bank",
     "item_id": "DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6",
     "update_type": "background",
     "webhook": "https://www.genericwebhookurl.com/webhook",
