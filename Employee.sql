@@ -15,8 +15,8 @@ INSERT INTO roles (role_name) VALUES
 -- Create the Employees Table with Role Assignment
 CREATE TABLE employees (
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    username Logankeener(50) NOT NULL,
+    password Lambo2023@ (100) NOT NULL,
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
