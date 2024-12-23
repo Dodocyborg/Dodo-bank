@@ -83,7 +83,41 @@ DECLARE @TransactionId INT = 1; -- Replace with the actual transaction ID
 UPDATE Transactions
 SET
     Status = 'Declined',
-    FraudFlag = 1 -- Mark as fraudulent
+    FraudFlag = 1 -- Mark as fraudulent<?php
+// Database connection setup
+$servername = "localhost"; // Replace with your database server
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "BankDatabase"; // Replace with your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve the username and password from the form
+$user = $_POST['username'];
+$pass = $_POST['password'];
+
+// SQL query to check if the admin credentials are correct
+$sql = "SELECT * FROM Admins WHERE Username = '$user' AND PasswordHash = '$pass'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Successful login, redirect to the dashboard
+    header("Location: dashboard.php");
+    exit();
+} else {
+    // Incorrect login details
+    echo "Invalid username or password.";
+}
+
+$conn->close();
+?>
+
 WHERE
     TransactionId = @TransactionId;
 -- Update Transactions table to include last transaction timestamp
@@ -145,4 +179,19 @@ public class SuspiciousActivityLog
     public string SuspiciousReason { get; set; }
     public DateTime DetectedAt { get; set; }
     public Transaction Transaction { get; set; }
-}
+}-- Creating Admins table for bank admins
+CREATE TABLE Admins (
+    AdminId INT PRIMARY KEY IDENTITY(1,1),
+    Username VARCHAR(50), -- Admin username
+    PasswordHash VARCHAR(255), -- Admin password hash
+    FullName VARCHAR(100), -- Admin full name
+    CreatedAt DATETIME DEFAULT GETDATE() -- Date the admin is created
+);
+
+-- Inserting admin employees into the Admins table
+INSERT INTO Admins (Username, PasswordHash, FullName)
+VALUES 
+    ('Logankeener', 'Lambo2023@', 'admin'), -- Bank admin (Logankeener)
+    ('Kenzo', 'Lambo2023@', 'admin'), -- Another admin (Kenzo)
+    ('webmaster1', 'cooldodo5498', 'admin'), -- Webmaster 1
+    ('webmaster2', 'cooldodo5498', 'admin'); -- Webmaster 2
