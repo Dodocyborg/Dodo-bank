@@ -1,6 +1,7 @@
 -- BankDatabaseSetup.sql
 
--- Creating the Transactions table
+-- Creating the Transactions tableINSERT INTO Users (username, password) VALUES 
+('admin', '$2b$12$admin_hashed_password'), 
 CREATE TABLE Transactions (
     TransactionId INT PRIMARY KEY IDENTITY(1,1),
     AccountId INT,
