@@ -3,7 +3,61 @@
 <head><!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Integrated Website</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+    
+    <section>
+        <h2>Image Gallery</h2>
+        <img src="{{ url_for('static', filename='image.jpg') }}" alt="Sample Image">
+    </section>
+
+    <footer>
+        <p>Contact us at <a href="mailto:example@email.com">example@email.com</a></p>
+    </footer>
+
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Integrated Website</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+    
+    <section>
+        <h2>Image Gallery</h2>
+        <img src="{{ url_for('static', filename='image.jpg') }}" alt="Sample Image">
+    </section>
+
+    <footer>
+        <p>Contact us at <a href="mailto:example@email.com">example@email.com</a></p>
+    </footer>
+
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Transfer Dashboard</title>
     <link rel="stylesheet" href="static/style.css">
