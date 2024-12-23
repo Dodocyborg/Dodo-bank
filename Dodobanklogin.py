@@ -212,7 +212,41 @@ for event in events:{
   # iterate through events{
   "webhook_type": "AUTH",
   "webhook_code": "DEFAULT_UPDATE",
-  "item_id": "wz666MBjYWTp2PDzzggYhM6oWWmBb",
+  "item_id": "wz666MBjYWTp2PDzzggYhM6oWWmBb",from flask import Flask, jsonify
+from plaid import Client
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get API keys from environment variables
+PLAID_CLIENT_ID = os.getenv("PLAID_CLIENT_ID")
+PLAID_SECRET = os.getenv("PLAID_SECRET")
+PLAID_ENV = os.getenv("PLAID_ENV", "sandbox")  # Default to sandbox if not set
+
+# Initialize Plaid client
+client = Client.from_env()  # Automatically reads keys from environment variables
+
+app = Flask(__name__)
+
+@app.route('/auth', methods=['POST'])
+def auth():
+    access_token = request.json.get('access_token')
+    if not access_token:
+        return jsonify({"error": "Access token is required"}), 400
+
+    try:
+        # Use Plaid API
+        auth_request = AuthGetRequest(access_token=access_token)
+        auth_response = client.auth_get(auth_request)
+        return jsonify(auth_response.to_dict())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
   "account_ids_with_updated_auth": {
     "BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp": [
       "ACCOUNT_NUMBER"
