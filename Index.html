@@ -132,7 +132,7 @@
             axios.post('/transfer', {
                 amount: amount,
                 to_account: toAccount,
-                from_account: "YOUR_ACCOUNT_ID"  // This should come from Plaid auth response
+                from_account: "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D"  // This should come from Plaid auth response
             })
             .then(function(response) {
                 alert(response.data.message);
