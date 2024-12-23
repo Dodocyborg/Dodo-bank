@@ -1,5 +1,19 @@
 request = AuthGetRequest(access_token=access_token)
-response = client.auth_get(request)
+response = client.auth_get(request)from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/auth', methods=['POST'])
+def auth():
+    access_token = request.json.get('access_token')
+    if not access_token:
+        return jsonify({"error": "Access token is required"}), 400
+    # You can add further logic here as needed
+    return jsonify({"message": "POST request successful!"})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 numbers = response['numbers']{from flask import Flask, request, jsonify
 from plaid import Client
 from plaid.api import Auth, BankTransfer
