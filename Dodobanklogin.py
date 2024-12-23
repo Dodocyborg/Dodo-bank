@@ -1,10 +1,110 @@
 request = AuthGetRequest(access_token=access_token)
 response = client.auth_get(request)
-numbers = response['numbers']{
+numbers = response['numbers']{from flask import Flask, request, jsonify
+from plaid import Client
+from plaid.api import Auth, BankTransfer
+from plaid.model import (
+    AuthGetRequest,
+    BankTransferEventListRequest,
+    BankTransferEventSyncRequest,
+)
+
+app = Flask(__name__)
+
+# Initialize Plaid client (replace with your API keys)
+client = Client.from_env()  # Set PLAID_CLIENT_ID and PLAID_SECRET in your environment variables.
+
+# Example route for authentication
+@app.route('/auth', methods=['POST'])
+def auth():
+    access_token = request.json.get('access_token')
+    if not access_token:
+        return jsonify({"error": "Access token is required"}), 400
+
+    try:
+        # Get account and routing numbers
+        auth_request = AuthGetRequest(access_token=access_token)
+        auth_response = client.auth.get(auth_request)
+        numbers = auth_response['numbers']
+        return jsonify(numbers)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# Example route for bank transfer events
+@app.route('/bank_transfer_events', methods=['POST'])
+def bank_transfer_events():
+    try:
+        start_date = request.json.get('start_date')
+        end_date = request.json.get('end_date')
+
+        # Fetch bank transfer events
+        event_request = BankTransferEventListRequest(start_date=start_date, end_date=end_date)
+        event_response = client.bank_transfer_event.list(event_request)
+        events = event_response['bank_transfer_events']
+
+        return jsonify({"events": events})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# Example route to sync bank transfer events
+@app.route('/bank_transfer_events/sync', methods=['POST'])
+def bank_transfer_events_sync():
+    try:
+        after_id = request.json.get('after_id')
+
+        sync_request = BankTransferEventSyncRequest(after_id=after_id)
+        sync_response = client.bank_transfer_event.sync(sync_request)
+        events = sync_response['bank_transfer_events']
+
+        return jsonify({"events": events})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
   "accounts": [
     {
       "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-      "balances": {
+      "balances": {from plaid.model import AuthGetRequest, BankTransferEventListRequest, BankTransferEventSyncRequest
+from plaid.api import plaid_api
+from plaid.exceptions import ApiException
+
+client = plaid_api.PlaidApi(configuration)  # Replace with your Plaid API configuration
+
+# Fetch account numbers
+def get_account_numbers(access_token):
+    try:
+        request = AuthGetRequest(access_token=access_token)
+        response = client.auth_get(request)
+        return response.to_dict()
+    except ApiException as e:
+        print(f"Error: {e}")
+        return None
+
+# Fetch bank transfer events
+def get_bank_transfer_events(params):
+    try:
+        request = BankTransferEventListRequest(**params)
+        response = client.bank_transfer_event_list(request)
+        return response.to_dict()['bank_transfer_events']
+    except ApiException as e:
+        print(f"Error: {e}")
+        return []
+
+# Sync bank transfer events
+def sync_bank_transfer_events(params):
+    try:
+        request = BankTransferEventSyncRequest(**params)
+        response = client.bank_transfer_event_sync(request)
+        return response.to_dict()['bank_transfer_events']
+    except ApiException as e:
+        print(f"Error: {e}")
+        return []
+
         "available": 100,
         "current": 110,
         "limit": null,
