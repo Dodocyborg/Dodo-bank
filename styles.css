@@ -1,6 +1,57 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #202020
+    background-color: #202020/* Ensure the page background is dark blue */
+body {
+    background-color: #00008B; /* Dark blue background */
+    color: white; /* White text for contrast */
+    font-family: Arial, sans-serif; /* Optional: Set a font family */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Dark Blue Text */
+.dark-blue-text {
+    color: darkblue; /* Dark blue color for text */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Dark Blue Background (on a specific div) */
+.dark-blue-background {
+    background-color: darkblue; /* Dark blue background for div */
+    color: white; /* White text for contrast */
+    padding: 20px;
+    border-radius: 8px; /* Optional: Rounded corners */
+    text-align: center; /* Center align text */
+}
+
+/* Dark Blue Border */
+.dark-blue-border {
+    border: 3px solid darkblue;
+    padding: 20px;
+    width: 80%;
+    margin: 10px auto;
+    text-align: center; /* Center align text */
+}
+
+/* Dark Blue Link */
+.dark-blue-link {
+    color: darkblue;
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+}
+
+.dark-blue-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Dark Blue Inline Styling */
+div[style*="background-color: #00008B;"] {
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
     color: white;
     display: flex;
     justify-content: center;
