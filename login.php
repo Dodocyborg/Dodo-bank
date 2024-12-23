@@ -1,7 +1,7 @@
 <?php
 session_start();
 $servername = "localhost";
-$username = "root";
+$username = "Logankeener";
 $password = Lambo2023@
 $dbname = "bank_system"; // Change to your DB name
 
