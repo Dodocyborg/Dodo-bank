@@ -8,8 +8,8 @@ if ($conn->connect_error) {
 $output = shell_exec('python3 Websiteintegration.py');<?php
 // Database connection
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "admin";
+$password = "Lambo2023@",
 $dbname = "dodo_bank";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
